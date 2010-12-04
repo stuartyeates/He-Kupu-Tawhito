@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<collection xmlns="http://exist-db.org/collection-config/1.0">
+  <!-- 
+       This is a metadata file describing the indexes wa want to be
+       built for this collection. See http://exist.sourceforge.net/tuning.html
+  -->
+  <index xmlns:tei="http://www.tei-c.org/ns/1.0"
+	 xmlns:xml="http://www.w3.org/XML/1998/namespace">
+    
+    <create qname="lemma" type="xs:string"/>
+    <create path="@xml:id" type="xs:string"/>
+    <create path="@xml:lang" type="xs:string"/>
+    <create path="//tei:w/@lemma" type="xs:string"/>
+
+  </index>
+</collection>
