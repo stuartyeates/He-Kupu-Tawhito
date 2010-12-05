@@ -475,14 +475,12 @@ do
 	then
 	   wget "http://www.biblegateway.com/passage/?search="$file"&version=MAORI" --output-document=$file-MAORI.orig.html
 	fi
-	#tidy -asxml -wrap 0 -n $file-MAORI.orig.html  | xsltproc --novalid clean.xsl -  | xmllint --format -  > $file-MAORI.orig.xml
 	make $file-MAORI.words.xml
 
 	if [ ! -e $file-KJV.orig.html ]
 	then
 	    wget "http://www.biblegateway.com/passage/?search="$file"&version=KJV" --output-document=$file-KJV.orig.html
 	fi
-	#tidy -asxml -wrap 0 -n $file-KJV.orig.html  |xsltproc --novalid clean.xsl -  |xmllint --format -  > $file-KJV.orig.xml
 	make $file-KJV.words.xml
 done
 
@@ -496,5 +494,5 @@ cat >>import.xml <<END
 END
 done
 cat import.xml.end >> import.xml
-xmllint --xinclude import.xml |  xsltproc  teinormalise.xsl - > import.words.xml
+xmllint --xinclude import.xml |  xsltproc  ../../xsl/ensureXmlIds.xsl - > import.words.xml
 

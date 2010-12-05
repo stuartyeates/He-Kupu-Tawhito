@@ -5,8 +5,7 @@
 		xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   <xsl:output indent="yes"/>
 
-  <!-- put URLs to to the NZETC website into 'n' attributes of
-       documents so we can preserve deep linking back to the source -->
+  <!-- convert lots of random tei tags to either tei:div or tei:p -->
 
   <xsl:template match="@*|node()" priority="-1">
     <xsl:copy>

@@ -4,7 +4,7 @@ declare default element namespace "http://www.tei-c.org/ns/1.0";
 (: declare option exist:serialize "method=html media-type=text/xml indent=yes"; :)
 declare option exist:serialize "method=xml media-type=application/xml process-xsl-pi=yes indent=yes"; 
  
-(: let $collection := '/db/kupu/korero' :)
+(: let $collection := '/he_kupu_tawhito' :)
 (: let $q := request:get-parameter('kupu', 'mohio') :)
 (: let $lang := request:get-parameter('lang', 'mi') :)
 
@@ -24,7 +24,7 @@ document {
   <text>
     <body>
       <div> {
-              let    $collection := '/db/kupu/korero',
+              let    $collection := '/db/he_kupu_tawhito/',
                      $q := request:get-parameter('kupu', 'mohio'),
                      $lang := request:get-parameter('reo', 'mi'),
                      $first := request:get-parameter('kotahi', 1) cast as xs:decimal,
@@ -34,17 +34,18 @@ document {
             <form>
                <orth>{$q}</orth>
             </form>{
-  for $word at $count in subsequence(collection($collection)//w[@lemma=$q][@xml:lang=$lang], $first,  $last)
+    for $word at $count in subsequence(//w[@lemma=$q][@xml:lang=$lang], $first,  $last)     
      let $this := $word/ancestor::*[@n][1]
      let $thisid := $this/@xml:id
      let $url := $this/@n
      let $lang := $word/@xml:lang
+     let $thatid := translate($this/@corresp, '#', '')
      let $that :=
          if ( $this/@corresp )
          then (
-           $this/../../*/*[concat('#',@xml:id)=$this/@corresp]
+            $this/../..//*[concat('#',@xml:id)=$this/@corresp] 
          ) else (
-         "no corresp"
+            "no corresp"
          )
      return
          <cit n="{$url}" corresp="#{$word/@xml:id}">

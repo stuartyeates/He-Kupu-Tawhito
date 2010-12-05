@@ -3,8 +3,7 @@
 		xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   <xsl:output indent="yes"/>
 
-  <!-- put URLs to to the NZETC website into 'n' attributes of
-       documents so we can preserve deep linking back to the source -->
+  <!-- updates the cache options of the exist config files -->
 
   <xsl:template match="@*|node()" priority="-1">
     <xsl:copy>

@@ -23,16 +23,6 @@
      </xsl:copy>
   </xsl:template>
 
-<!--
-  <xsl:template match="*">
-    <xsl:variable name='lang' select="ancestor-or-self::*[normalize-space(@xml:lang)][1]/@xml:lang"/>
-    <xsl:copy>
-      <xsl:attribute name="xml:lang"><xsl:value-of select="$lang"/></xsl:attribute>
-      <xsl:apply-templates select="@*|node()"/>
-     </xsl:copy>
-  </xsl:template>
--->
-
   <!--swallow the any original n attributes -->
   <xsl:template match="@n"/>
 
