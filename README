@@ -1,3 +1,6 @@
-He Kupu Tawhito is a multi-lingual concordance program for digtial texts encoded in TEI. 
+He Kupu Tawhito is a multi-lingual concordance program for digtial texts 
+encoded in TEI P5 ( http://www.tei-c.org/Guidelines/P5/index.xml ) and 
+manipulated using makefiles, XSLT and XQuery. 
 
-He Kupu Tawhito was orginally started as an entry for http://www.mixandmash.org.nz/ but was never actually entered. 
+He Kupu Tawhito was orginally started as an entry for 
+http://www.mixandmash.org.nz/ but was never actually entered. 
