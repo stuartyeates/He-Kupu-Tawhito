@@ -14,7 +14,13 @@ allfiles=AchPlum.words.xml AclEarl.words.xml AdaCoun.words.xml AleBush.words.xml
 %.words.xml: %.fixedurls.xml
 	saxonb-xslt  $^ ../../xsl/tei2teiWords.xsl  > $@
 
-all: $(bilingualfiles)
+all: copy-old bilingualfiles
+
+copy-old:
+	cp ../../../he_kupu_tawhito-old/korero/www.nzetc.org/*.orig.* .
+
+
+bilingualfiles: $(bilingualfiles)
 
 clean:
 	rm -rf *.html *.fixedurls.xml *.words.xml
