@@ -8,28 +8,18 @@
   <!-- This is a simple stylesheet that inserts word tags around words
   (and implicitly defines what those words are) -->
 
-  <xsl:variable name="lowernormal" select="'qwertyuiopasdfghjklzxcvbnm'"/>
-  <xsl:variable name="upper"       select="'QWERTYUIOPASDFGHJKLZXCVBNM'"/>
+  <xsl:variable name="loweren" select="'qwertyuiopasdfghjklzxcvbnm'"/>
+  <xsl:variable name="upperen" select="'QWERTYUIOPASDFGHJKLZXCVBNM'"/>
   
-  <xsl:variable name="drop" select="'{}()*'"/>
-  <xsl:variable name="punctuation" select="'.:;,!?'"/>
-  <xsl:variable name="regexp" select="('.:;,!?')*()"/>
 
-
-  <xsl:template match="@*|node()" priority="-1">
-    <xsl:copy>
-      <xsl:apply-templates select="@*|node()"/>
-    </xsl:copy>
-  </xsl:template>
-
-  <xsl:template match="text()[normalize-space()]">
+  <xsl:template match="text()[normalize-space()][ancestor::*[normalize-space(@xml:lang)][1]/@xml:lang='en']">
     <xsl:variable name='orig' select="."/>
     <xsl:variable name='lang' select="$orig/ancestor::*[normalize-space(@xml:lang)][1]/@xml:lang"/>
 
     <xsl:analyze-string select="." regex="[\p{{L}}\p{{N}}]+">
       <xsl:matching-substring>
 
-	<xsl:variable name="normalised" select="translate(.,$upper,$lowernormal)"/>
+	<xsl:variable name="normalised" select="translate(.,$upperen,$loweren)"/>
 	
 	<xsl:element name="w" namespace="http://www.tei-c.org/ns/1.0">
 	  <xsl:attribute name="xml:lang"><xsl:value-of select="$lang"/></xsl:attribute>

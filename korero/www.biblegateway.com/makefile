@@ -3,7 +3,7 @@
 #
 
 all:
-	cp ../../../he_kupu_tawhito-old/korero/www.biblegateway.com/*.orig.* .
+	cp ../../../he_kupu_tawhito-old/korero/www.biblegateway.com/*.orig.html .
 	./work.sh
 
 %.fixedurls.xml: %.orig.xml

@@ -8,21 +8,10 @@
   <!-- This is a simple stylesheet that inserts word tags around words
   (and implicitly defines what those words are) -->
 
-  <xsl:variable name="lowernormal" select="'qwertyuiopasdfghjklzxcvbnmaeiouaeiou'"/>
-  <xsl:variable name="upper"       select="'QWERTYUIOPASDFGHJKLZXCVBNMĀĒĪŌŪāēīōū'"/>
-  
-  <xsl:variable name="drop" select="'{}()*'"/>
-  <xsl:variable name="punctuation" select="'.:;,!?'"/>
-  <xsl:variable name="regexp" select="('.:;,!?')*()"/>
+  <xsl:variable name="lowermi" select="'qwertyuiopasdfghjklzxcvbnmaeiouaeiou'"/>
+  <xsl:variable name="uppermi" select="'QWERTYUIOPASDFGHJKLZXCVBNMĀĒĪŌŪāēīōū'"/>
 
-
-  <xsl:template match="@*|node()" priority="-1">
-    <xsl:copy>
-      <xsl:apply-templates select="@*|node()"/>
-    </xsl:copy>
-  </xsl:template>
-
-  <xsl:template match="text()[normalize-space()]">
+  <xsl:template match="text()[normalize-space()][ancestor::*[normalize-space(@xml:lang)][1]/@xml:lang='mi'][not(ancestor::tei:w)]">
     <xsl:variable name='orig' select="."/>
     <xsl:variable name='lang' select="$orig/ancestor::*[normalize-space(@xml:lang)][1]/@xml:lang"/>
 
@@ -31,7 +20,7 @@
 
 	<xsl:variable name="normalised">
 	  <xsl:call-template name="normal">
-	    <xsl:with-param name="string" select="translate(.,$upper,$lowernormal)"/>
+	    <xsl:with-param name="string" select="translate(.,$uppermi,$lowermi)"/>
 	  </xsl:call-template>
 	</xsl:variable>
 	
@@ -48,16 +37,16 @@
     </xsl:analyze-string>
   </xsl:template>
 
+  <!-- remove repeated vowels -->
   <xsl:template name="normal">
     <xsl:param name="string"/>
-    
     <xsl:if test="string-length($string) &gt; 0">
       <xsl:if test="not(compare(substring($string,1,1),substring($string,2,1))=0)">
 	<xsl:value-of select="substring($string,1,1)"/>
       </xsl:if>
       <xsl:call-template name="normal">
 	<xsl:with-param name="string" select="substring($string,2)"/>
-	</xsl:call-template>
+      </xsl:call-template>
     </xsl:if>
   </xsl:template>
   
