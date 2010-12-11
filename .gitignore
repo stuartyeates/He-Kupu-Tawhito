@@ -1,0 +1,9 @@
+# Files that git should ignore
+# Lines starting with '#' are considered comments.
+# Ignore any file named foo.txt.
+foo.txt
+# Ignore html and xml files in the korero folders
+korero/*/*.xml
+korero/*/*.html
+# Ingore the exist install directory
+eXist-install
