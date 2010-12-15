@@ -34,27 +34,21 @@ document {
             <form>
                <orth>{$q}</orth>
             </form>{
-    for $word at $count in subsequence(//w[@lemma=$q][@xml:lang=$lang], $first,  $last)     
-     let $this := $word/ancestor::*[@n][1]
-     let $thisid := $this/@xml:id
-     let $url := $this/@n
-     let $lang := $word/@xml:lang
-     let $thatid := translate($this/@corresp, '#', '')
-     let $that :=
-         if ( $this/@corresp )
-         then (
-            $this/../..//*[concat('#',@xml:id)=$this/@corresp] 
-         ) else (
-            "no corresp"
-         )
-     return
-         <cit n="{$url}" corresp="#{$word/@xml:id}">
-           {$this}
-           
-           {$that}
-	 </cit>
-	  
-   }</entry>
+                    for $this at $count in subsequence(//p[@n][.//w[@lemma=$q][@xml:lang=$lang]], $first,  $last)     
+		      let $words := $this//w[@lemma=$q][@xml:lang=$lang]/@xml:id
+                      let $thisid :=  $this/@xml:id
+		      let $thishash := concat('#', $thisid)
+                      let $url := $this/@n
+		      let $others := //p[contains($this/@corresp,@xml:id)][(concat('#',@xml:id)=$this/@corresp) or (concat('#',$this/@xml:id)=@corresp)] |
+		      	  //p[contains(@corresp,$this/@xml:id)][(concat('#',@xml:id)=$this/@corresp) or (concat('#',$this/@xml:id)=@corresp)]
+		      
+                      return
+                      <cit n="{$url}"  corresp="#{$words}">
+                          {$this}
+                          {$others}
+                      </cit>
+                    }
+         </entry>
 
       }        
       </div>

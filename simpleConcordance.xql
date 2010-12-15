@@ -1,7 +1,6 @@
 xquery version "1.0";
  
 declare default element namespace "http://www.tei-c.org/ns/1.0";
-(: declare option exist:serialize "method=html media-type=text/xml indent=yes"; :)
 declare option exist:serialize "method=xml media-type=application/xml process-xsl-pi=yes indent=yes"; 
  
 let $target := 'xml-stylesheet',
