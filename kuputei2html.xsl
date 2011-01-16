@@ -6,7 +6,7 @@
   
   <xsl:output indent="yes"/>
 
-    <xsl:variable name="title"><xsl:value-of select="//tei:orth/text()"/></xsl:variable>
+    <xsl:variable name="title"><xsl:value-of select="//tei:titleStmt/text()"/></xsl:variable>
     <xsl:variable name="lang"><xsl:value-of select="//tei:entry/@xml:lang"/></xsl:variable>
 
   <xsl:template match="@*|node()" priority="-1">
@@ -34,7 +34,7 @@
 
   <xsl:template match="tei:entry">
     <html:h2 xml:lang="mi">He Kupu Tawhito</html:h2>
-    <html:h1 xml:lang="mi">Kupu matua: <html:span class="hit-word" style="font-style: italic" xml:lang="{$lang}"><xsl:value-of select="$title"/></html:span></html:h1>
+    <html:h1 xml:lang="mi">Kupu matua: <html:span class="hit-word" style="font-style:  bold" xml:lang="{$lang}"><xsl:value-of select="$title"/></html:span></html:h1>
     <html:div>
       <xsl:apply-templates select="tei:cit"/>
     </html:div>
@@ -52,17 +52,17 @@
   </xsl:template>
 
   <xsl:template match="tei:p">
-    <html:div>
+    <html:p>
       <xsl:apply-templates select="node()"/>
       <html:a href="{@n}" alt="ko te tohutoro"  style="font-style: italic">↗</html:a>
-    </html:div>
+    </html:p>
   </xsl:template>
 
   <xsl:template match="tei:w">
     <xsl:variable name="url"><xsl:value-of select="concat('kupu.xql?reo=', @xml:lang, '&amp;kupu=', @lemma)"/></xsl:variable>
     <xsl:choose>
-      <xsl:when test="concat('#',@xml:id)=../../@corresp">
-        <html:span class="hit-word" style="font-style: italic"><html:a href="{$url}" alt="">
+      <xsl:when test="contains(../../@corresp,@xml:id)">
+        <html:span class="hit-word" style="font-style: italic;font-weight:bold"><html:a href="{$url}" alt="">
           <xsl:apply-templates select="node()"/>
         </html:a></html:span>
       </xsl:when>

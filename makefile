@@ -25,8 +25,8 @@ $(EXIST_HOME): $(EXIST_ZIP)
 	cat $(EXIST_HOME)/client.properties  | sed 's/8080/8081/' > tmp.settings
 	mv tmp.settings $(EXIST_HOME)/client.properties
 	mkdir -p $(EXIST_HOME)/webapp/he_kupu_tawhito/
-	cp teitext2teientries.xql $(EXIST_HOME)/webapp/he_kupu_tawhito/kupu.xql
-	cp teiresults2htmlresults.xsl $(EXIST_HOME)/webapp/he_kupu_tawhito/
+	cp kupu.xql $(EXIST_HOME)/webapp/he_kupu_tawhito/kupu.xql
+	cp kuputei2html.xsl $(EXIST_HOME)/webapp/he_kupu_tawhito/
 	xsltproc xsl/updateExistOptions.xsl $(EXIST_HOME)/conf.xml > tmp.settings
 	mv tmp.settings $(EXIST_HOME)/conf.xml
 	xsltproc xsl/updateExistOptions.xsl $(EXIST_HOME)/conf.xml > tmp.settings
@@ -52,7 +52,7 @@ auto-exist:
 	firefox http://localhost:8081/exist/he_kupu_tawhito/kupu.xql &
 
 query-exist: $(EXIST_HOME)
-	time --verbose $(EXIST_HOME)/bin/client.sh  -F teitext2teientries.xql --output teitext2teientries.out.xml
+	time --verbose $(EXIST_HOME)/bin/client.sh  -F kupu.xql --output teitext2teientries.out.xml
 
 stop-exist:
 	 $(EXIST_HOME)/bin/shutdown.sh
