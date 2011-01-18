@@ -10,6 +10,9 @@ return  processing-instruction {$target} {$content},
 document {
               let    $collection := '/db/he_kupu_tawhito/',
                      $tuatahi := request:get-parameter('tuatahi', 'mohio'),
+                     $tuarua := request:get-parameter('tuarua', 'rewa'),
+                     $tuatoru := request:get-parameter('tuatoru', 'i'),
+                     $tuawha := request:get-parameter('tuawha', 'nga'),
                      $reo := request:get-parameter('reo', 'mi'),
                      $kotahi := request:get-parameter('kotahi', 1) cast as xs:decimal,
                      $last := 15 + $kotahi
@@ -22,6 +25,9 @@ document {
         <sourceDesc>
 	   <idno type="url.path">ngakupu.xql</idno>
 	   <idno type="url.query.tuatahi">{$tuatahi}</idno>
+	   <idno type="url.query.tuarua">{$tuarua}</idno>
+	   <idno type="url.query.tuatoru">{$tuatoru}</idno>
+	   <idno type="url.query.tuawha">{$tuawha}</idno>
 	   <idno type="url.query.reo">{$reo}</idno>
 	   <idno type="url.query.kotahi">{$kotahi}</idno>
         </sourceDesc>
