@@ -25,8 +25,10 @@ $(EXIST_HOME): $(EXIST_ZIP)
 	cat $(EXIST_HOME)/client.properties  | sed 's/8080/8081/' > tmp.settings
 	mv tmp.settings $(EXIST_HOME)/client.properties
 	mkdir -p $(EXIST_HOME)/webapp/he_kupu_tawhito/
-	cp kupu.xql $(EXIST_HOME)/webapp/he_kupu_tawhito/kupu.xql
+	cp kupu.xql $(EXIST_HOME)/webapp/he_kupu_tawhito/
 	cp kuputei2html.xsl $(EXIST_HOME)/webapp/he_kupu_tawhito/
+	cp ngakupu.xql $(EXIST_HOME)/webapp/he_kupu_tawhito/
+	cp ngakuputei2html.xsl $(EXIST_HOME)/webapp/he_kupu_tawhito/
 	xsltproc xsl/updateExistOptions.xsl $(EXIST_HOME)/conf.xml > tmp.settings
 	mv tmp.settings $(EXIST_HOME)/conf.xml
 	xsltproc xsl/updateExistOptions.xsl $(EXIST_HOME)/conf.xml > tmp.settings
