@@ -40,7 +40,7 @@ document {
             <form>
                <orth>{$tuatahi}</orth>
             </form>{
-                    for $this at $count in subsequence(//p[@n][.//w[@lemma=$tuatahi][@xml:lang=$reo]], $kotahi,  $last)     
+                    for $this at $count in subsequence(//p[@n][.//w[@lemma=$tuatahi][@xml:lang=$reo][following::w[@lemma=$tuarua][@xml:lang=$reo]]], $kotahi,  $last)     
 		      let $words := $this//w[@lemma=$tuatahi][@xml:lang=$reo]/@xml:id
                       let $thisid :=  $this/@xml:id
 		      let $thishash := concat('#', $thisid)
