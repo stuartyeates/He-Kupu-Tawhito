@@ -49,6 +49,8 @@ start-exist:
 #  http://exist.sourceforge.net/tuning.html
 auto-exist:
 	$(EXIST_HOME)/bin/client.sh uri=xmldb:exist://localhost:8081/exist/xmlrpc -m /db/system/config/db/he_kupu_tawhito/ -p collection.xconf --no-gui
+	$(EXIST_HOME)/bin/client.sh uri=xmldb:exist://localhost:8081/exist/xmlrpc -m /db/system/config/db/collection.xconf -p collection.xconf --no-gui
+	$(EXIST_HOME)/bin/client.sh uri=xmldb:exist://localhost:8081/exist/xmlrpc -m /db/system/config/db/ -p collection.xconf --no-gui
 	$(EXIST_HOME)/bin/client.sh uri=xmldb:exist://localhost:8081/exist/xmlrpc -m /db/he_kupu_tawhito/ -p korero/www.biblegateway.com/import.words.xml --no-gui
 #	$(EXIST_HOME)/bin/client.sh uri=xmldb:exist://localhost:8081/exist/xmlrpc -m /db/he_kupu_tawhito/ -p korero/www.nzetc.org/A*.words.xml
 	firefox http://localhost:8081/exist/he_kupu_tawhito/kupu.xql &
