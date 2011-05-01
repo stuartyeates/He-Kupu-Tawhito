@@ -5,8 +5,52 @@ EXIST_ZIP=$(PWD)/../eXist-setup-1.4.0-rev10440.jar
 JAVA_OPTS=-"Xmx6000m -Dfile.encoding=UTF-8"
 JAVA_OPTIONS="-Xmx6000m -Dfile.encoding=UTF-8"
 CLIENT_JAVA_OPTIONS="-Xmx6000m -Dfile.encoding=UTF-8"
+SPACE=" "
 
 all: $(EXIST_HOME) start-exist auto-exist 
+
+experiment:
+	@$(MAKE) allclean
+	@$(MAKE) --directory=korero/www.biblegateway.com-sampler all
+	@$(MAKE) $(EXIST_HOME)
+	( JAVA_OPTIONS=$(JAVA_OPTIONS) $(EXIST_HOME)/bin/startup.sh >> $(EXIST_HOME)/eXist.log)&
+	sleep 5
+#	$(EXIST_HOME)/bin/client.sh uri=xmldb:exist://localhost:8081/exist/xmlrpc -m /db/system/config/db/he_kupu_tawhito/ -p collection.xconf --no-gui
+	$(EXIST_HOME)/bin/client.sh uri=xmldb:exist://localhost:8081/exist/xmlrpc -m /db/he_kupu_tawhito/ -p korero/www.biblegateway.com-sampler/import.words.xml --no-gui
+	sleep 5
+	wget --output-document=/dev/null "http://localhost:8081/exist/he_kupu_tawhito/kupu.xql?reo=mi&kupu=i"
+	sleep 5
+	echo $(FILECOUNT) $(SPACE)  >> /tmp/wget.log
+	/usr/bin/time --format %E --output=/tmp/wget.log --append wget --output-document=/dev/null "http://localhost:8081/exist/he_kupu_tawhito/kupu.xql?reo=mi&kupu=te"
+
+
+experiments:
+	rm -f /tmp/wget.log
+	@$(MAKE) FILECOUNT=2 experiment
+	@$(MAKE) FILECOUNT=4 experiment
+	@$(MAKE) FILECOUNT=6 experiment
+	@$(MAKE) FILECOUNT=8 experiment
+	@$(MAKE) FILECOUNT=10 experiment
+	@$(MAKE) FILECOUNT=12 experiment
+	@$(MAKE) FILECOUNT=14 experiment
+	@$(MAKE) FILECOUNT=16 experiment
+	@$(MAKE) FILECOUNT=18 experiment
+	@$(MAKE) FILECOUNT=20 experiment
+	@$(MAKE) FILECOUNT=22 experiment
+	@$(MAKE) FILECOUNT=24 experiment
+	@$(MAKE) FILECOUNT=26 experiment
+	@$(MAKE) FILECOUNT=28 experiment
+	@$(MAKE) FILECOUNT=30 experiment
+	@$(MAKE) FILECOUNT=32 experiment
+	@$(MAKE) FILECOUNT=34 experiment
+	@$(MAKE) FILECOUNT=36 experiment
+	@$(MAKE) FILECOUNT=38 experiment
+	@$(MAKE) FILECOUNT=40 experiment
+	@$(MAKE) FILECOUNT=42 experiment
+	@$(MAKE) FILECOUNT=44 experiment
+	@$(MAKE) FILECOUNT=46 experiment
+	@$(MAKE) FILECOUNT=48 experiment
+	@$(MAKE) FILECOUNT=50 experiment
 
 docs:
 #	@$(MAKE) --keep-going --directory=korero/www.nzetc.org 
