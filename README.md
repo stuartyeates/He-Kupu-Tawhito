@@ -1,4 +1,4 @@
-#He Kupu Tawhito
+# He Kupu Tawhito
 He Kupu Tawhito is a multi-lingual concordance program for digtial texts 
 encoded in TEI P5 ( http://www.tei-c.org/Guidelines/P5/index.xml ) and 
 manipulated using makefiles, XSLT and XQuery. 
